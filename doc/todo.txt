@@ -14,9 +14,8 @@ TODO
 		TesterDevices: "testerId","deviceId"
 		Testers: "testerId","firstName","lastName","country","lastLogin"
 *- make sure initial tests for class type pass now
-
-- test all validations
-- seed data
+*- test all validations
+*- seed data
 
 - test associations
 		- No tester can have duplicate devices.
