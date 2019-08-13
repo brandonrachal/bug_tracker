@@ -2,11 +2,11 @@
 
 TODO
 ---------------------------
-- create gemset
-- create project
-- edit gitignore
-- initial commit
-- create test classes - test for class - All should fail
+*- create gemset
+*- create project
+*- edit gitignore
+*- initial commit
+*- create test classes - test for class - All should fail
 - add tables
 - add seed
 		Bugs: "bugId","deviceId","testerId"
@@ -16,15 +16,12 @@ TODO
 - create models
 - make sure initial tests for class type pass now
 - test all validations
+- test associations
+		- No tester can have duplicate devices.
+		- No tester can file a bug for a device they aren't associated with
+- test search
 - seed data
 - create search page
 - test search
-
-	
-- No tester can have duplicate devices.
-- No tester can file a bug for a device they aren't associated with
-
-Not Required
-- create index pages for bugs, devices, testers
-
+- Write setup readme
 
