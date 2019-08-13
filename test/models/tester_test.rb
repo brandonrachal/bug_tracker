@@ -4,6 +4,7 @@ class TesterTest < ActiveSupport::TestCase
 
 	def setup
 		@tester = testers(:brandon)
+		@device = devices(:galaxy_s10)
 	end
 
 	test 'should be an instance of Tester' do
@@ -50,6 +51,20 @@ class TesterTest < ActiveSupport::TestCase
 			refute @tester.valid?, 'is valid when country is not 2 chars'
 			assert_not_nil @tester.errors[:country], 'no validation for country is not 2 chars'
 		end
+	end
+
+	test 'should have_many devices' do
+		assert @tester.save
+		assert @device.save
+		@tester.devices << @device
+		assert_equal @tester.devices.first, @device
+	end
+
+	test 'should have_many buggy_devices' do
+		assert @tester.save
+		assert @device.save
+		@tester.buggy_devices << @device
+		assert_equal @tester.buggy_devices.first, @device
 	end
 
 end
