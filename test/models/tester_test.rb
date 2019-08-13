@@ -38,4 +38,18 @@ class TesterTest < ActiveSupport::TestCase
 		assert_not_nil @tester.errors[:last_name], 'no validation for last_name over 60 chars'
 	end
 
+	test 'should be invalid with blank country' do
+		@tester.country = ''
+		refute @tester.valid?, 'is valid with blank country'
+		assert_not_nil @tester.errors[:country], 'no validation for blank country'
+	end
+
+	test 'should be invalid when country is not 2 chars' do
+		['a', 'aaa'].each do |code|
+			@tester.country = code
+			refute @tester.valid?, 'is valid when country is not 2 chars'
+			assert_not_nil @tester.errors[:country], 'no validation for country is not 2 chars'
+		end
+	end
+
 end
