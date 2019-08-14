@@ -69,11 +69,12 @@ class TesterTest < ActiveSupport::TestCase
 		end
 	end
 
-	test 'should have_many buggy_devices' do
+	test 'should have_many bugs' do
 		assert @tester.save
 		assert @device.save
-		@tester.buggy_devices << @device
-		assert_equal @tester.buggy_devices.first, @device
+		bug = Bug.new(device: @device)
+		@tester.bugs << bug
+		assert_equal @tester.bugs.first, bug
 	end
 
 end
