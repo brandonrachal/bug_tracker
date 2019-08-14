@@ -77,4 +77,9 @@ class TesterTest < ActiveSupport::TestCase
 		assert_equal @tester.bugs.first, bug
 	end
 
+	test 'should have a name' do
+		assert @tester.name.include? @tester.first_name
+		assert @tester.name.include? @tester.last_name
+	end
+
 end
