@@ -26,4 +26,14 @@ class DeviceTest < ActiveSupport::TestCase
 		assert_not_nil @device.errors[:description], 'no validation for description over 255 chars'
 	end
 
+	test 'all_devices should return an array of arrays' do
+		@device.save
+		htc = devices(:htc_one)
+		iphone = devices(:iphone_5)
+		htc.save
+		iphone.save
+		result = Device.all_devices
+		assert_equal result, [['Galaxy S10', 1], ['HTC One', 2], ['iPhone 5', 3]]
+	end
+
 end
