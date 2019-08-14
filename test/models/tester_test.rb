@@ -60,6 +60,15 @@ class TesterTest < ActiveSupport::TestCase
 		assert_equal @tester.devices.first, @device
 	end
 
+	test 'should throw ActiveRecord::RecordInvalid when duplicate devices' do
+		assert @tester.save
+		assert @device.save
+		@tester.devices << @device
+		assert_raises ActiveRecord::RecordInvalid do
+			@tester.devices << @device
+		end
+	end
+
 	test 'should have_many buggy_devices' do
 		assert @tester.save
 		assert @device.save
