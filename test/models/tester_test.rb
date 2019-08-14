@@ -86,7 +86,7 @@ class TesterTest < ActiveSupport::TestCase
 		taichi.save
 		oliver.save
 		result = Tester.all_countries
-		assert_equal result.length, 3
+		assert_equal result, ['JP', 'MX', 'US']
 	end
 
 
