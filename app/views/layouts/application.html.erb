@@ -10,6 +10,21 @@
     <%= yield :javascript %>
   </head>
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <%= link_to 'Bug Tracker', root_path, class: 'navbar-brand' %>
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              Testers
+            </li>
+          </ul>
+         
+        </div>
+      </div><!-- container -->
+    </nav>
+    <div class="container mt-3">
+      <%= yield %>
+    </div>
   </body>
 </html>
