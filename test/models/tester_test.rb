@@ -77,9 +77,17 @@ class TesterTest < ActiveSupport::TestCase
 		assert_equal @tester.bugs.first, bug
 	end
 
-	test 'should have a name' do
-		assert @tester.name.include? @tester.first_name
-		assert @tester.name.include? @tester.last_name
+	test 'all_countries should return all uniq countries' do
+		@tester.save
+		dinorah = testers(:dinorah)
+		taichi = testers(:taichi)
+		oliver = testers(:oliver)
+		dinorah.save
+		taichi.save
+		oliver.save
+		result = Tester.all_countries
+		assert_equal result.length, 3
 	end
+
 
 end

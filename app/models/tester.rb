@@ -8,8 +8,8 @@ class Tester < ApplicationRecord
 	validates :last_name, length: { maximum: 60 }, presence: true
 	validates :country, length: { is: 2 }, presence: true
 
-	def name
-		"#{first_name} #{last_name}"
+	def self.all_countries
+		select(:country).order(:country).distinct.map(&:country)
 	end
 
 end
