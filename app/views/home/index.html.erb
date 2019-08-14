@@ -1,1 +1,31 @@
-<h1>Home#Index</h1>
+<div class="row">
+	<div class="col-md-4">
+		<%= form_tag root_path do %>
+			<%= label_tag :country %>
+			<%= select_tag :country, options_for_select(["All"] + @countries, selected: params[:country]), class: 'form-control mb-2' %>
+			<%= label_tag :devices %>
+      <%= select_tag :devices, options_for_select([["All", "All"]] + @devices, selected: params[:devices]), multiple: true, size: 12, class: 'form-control mb-2' %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<div class="col-md-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Country</th>
+					<th>Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @testers.each do |tester| %>
+				<tr>
+					<td><%= full_name tester %></td>
+					<td><%= tester.country %></td>
+					<td><%= tester.bug_count %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
