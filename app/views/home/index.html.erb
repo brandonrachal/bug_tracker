@@ -1,8 +1,16 @@
+<% content_for :head do %>
+<script type="text/javascript" >
+  $(document).ready(function() {
+    
+  });
+</script>
+<% end %>
+
 <div class="row">
 	<div class="col-md-4">
 		<%= form_tag root_path do %>
 			<%= label_tag :country %>
-			<%= select_tag :country, options_for_select(["All"] + @countries, selected: params[:country]), class: 'form-control mb-2' %>
+			<%= select_tag :country, options_for_select(["All"] + @countries, selected: params[:country]), class: 'form-control mb-2'%>
 			<%= label_tag :devices %>
       <%= select_tag :devices, options_for_select([["All", "All"]] + @devices, selected: params[:devices]), multiple: true, size: 12, class: 'form-control mb-2' %>
       <%= submit_tag "Search", class: "btn btn-primary" %>
@@ -29,3 +37,5 @@
 		</table>
 	</div>
 </div>
+
+
