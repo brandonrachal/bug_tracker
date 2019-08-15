@@ -6,6 +6,7 @@ Steps for installation:
 ```
 bundle install
 rails db:migrate
+bundle exec rspec ./spec/models/
 rails db:seed
 rails s
 ```
