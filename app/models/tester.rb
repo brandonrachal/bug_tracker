@@ -14,9 +14,10 @@ class Tester < ApplicationRecord
 
 	def self.search(country, devices)
 		return [] if country.nil? && devices.nil?
+		devices = devices.reject(&:blank?) unless devices.blank?
 		query = select('testers.*, count(*) as bug_count').group('testers.id').joins(:bugs).order('bug_count desc')
-		query = query.where(country: country) if !country.blank? && country != 'All'
-		query = query.where(bugs: { device_id: devices }) if !devices.blank? && devices != ['All']
+		query = query.where(country: country) unless country.blank?
+		query = query.where(bugs: { device_id: devices }) unless devices.blank?
 		query
 	end
 
