@@ -106,21 +106,26 @@ describe Tester do
 			one = create(:tester, :with_bugs)
 			two = create(:tester)
 			two.bugs << FactoryBot.create(:bug_galaxy_s10)
+			two.bugs << FactoryBot.create(:bug_htc_one)
 			three = create(:tester)
 			three.bugs << FactoryBot.create(:bug_iphone_5)
 			ids = Tester.search('', []).map(&:id)
 			expect(ids).to eq [one.id, two.id, three.id]
+			bug_counts = Tester.search('', []).map(&:bug_count)
+			expect(bug_counts).to eq [4, 2, 1]
 		end
 
-		# it 'should return Testers by bug counts desc' do
-		# 	one = create(:tester, :with_bugs)
-		# 	two = create(:tester)
-		# 	two.bugs << FactoryBot.create(:bug_galaxy_s10)
-		# 	three = create(:tester)
-		# 	three.bugs << FactoryBot.create(:bug_iphone_5)
-		# 	ids = Tester.search('US', ['US']).map(&:id)
-		# 	expect(ids).to eq [one.id, two.id, three.id]
-		# end
+		it 'should return Testers from the US' do
+			one = create(:tester, :with_bugs)
+			two = create(:dinorah)
+			two.bugs << FactoryBot.create(:bug_galaxy_s10)
+			two.bugs << FactoryBot.create(:bug_htc_one)
+			three = create(:oliver)
+			three.bugs << FactoryBot.create(:bug_iphone_5)
+			ids = Tester.search('US', []).map(&:id)
+			expect(ids).to eq [one.id, three.id]
+		end
+
 	end
 
 end
