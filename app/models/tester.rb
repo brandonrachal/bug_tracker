@@ -12,15 +12,13 @@ class Tester < ApplicationRecord
 		select(:country).order(:country).distinct.map(&:country)
 	end
 
-	def self.search(country, devices)
-		return [] if country.nil? && devices.nil?
-		devices = devices.reject(&:blank?) unless devices.blank?
+	def self.search(country=:all, devices=:all)
 		query = select('testers.*, count(bugs.id) as bug_count').
 			group('testers.id').
 			left_joins(:bugs).
 			order('bug_count desc')
-		query = query.where(country: country) unless country.blank?
-		query = query.where(bugs: { device_id: devices }) unless devices.blank?
+		query = query.where(country: country) if !country.blank? and country != :all
+		query = query.where(bugs: { device_id: devices }) if !devices.blank? and devices != :all
 		query
 	end
 

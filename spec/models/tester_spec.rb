@@ -143,14 +143,14 @@ describe Tester do
 
 		it 'should return Testers by bug counts desc' do
 			testers = [brandon, dinorah, oliver, taichi, tester]
-			results = Tester.search('', [])
+			results = Tester.search(:all, :all)
 			expect(results.map(&:id)).to eq testers.map(&:id)
 			expect(results.map(&:bug_count)).to eq [4, 2, 2, 1, 0]
 		end
 
 		it 'should return Testers with country code US' do
 			testers = [brandon, oliver, tester]
-			results = Tester.search('US', [])
+			results = Tester.search('US', :all)
 			expect(results.map(&:id)).to eq testers.map(&:id)
 			expect(results.map(&:bug_count)).to eq [4, 2, 0]
 			expect(results.map(&:country)).to eq ['US', 'US', 'US']
