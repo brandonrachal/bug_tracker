@@ -106,7 +106,6 @@ describe Tester do
 	end
 
 	describe '.search' do
-
 		let!(:galaxy_s10) { create(:galaxy_s10) }
 		let!(:htc_one) { create(:htc_one) }
 		let!(:iphone_5) { create(:iphone_5) }
@@ -169,7 +168,6 @@ describe Tester do
 			results = Tester.search('JP', [galaxy_s10.id])
 			expect(results.length).to eq 0
 		end
-
 	end
 
 end
