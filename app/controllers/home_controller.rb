@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
 
 	def index
-		@countries = Tester.all_countries
-		@devices = Device.all_devices
+		@countries = ['All'] + Tester.all_countries
+		@devices = [['All', 'All']] + Device.all_devices
 		@testers = search_for_testers
 	end
 

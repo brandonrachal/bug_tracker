@@ -1,7 +1,6 @@
 <% content_for :javascript do %>
 <script type="text/javascript" >
 	function update_devices() {
-		console.log("Updating devices")
 		var device_ids = $("#search_devices").val();
   	if (device_ids.length == 0) {
   		$("#search_devices").val('All');
@@ -10,14 +9,12 @@
 				$("#search_devices").val('All');
 			}
   	}
-
 	}
   $(document).ready(function() {
   	update_devices();
   	$("#search_devices").change(function(){
   		update_devices();
   	});
-    
   });
 </script>
 <% end %>
@@ -26,9 +23,9 @@
 	<div class="col-md-4">
 		<%= form_tag root_path do %>
 			<%= label_tag 'search[country]', 'Country' %>
-			<%= select_tag 'search[country]', options_for_select(['All'] + @countries, selected: params.dig(:search, :country)), class: 'form-control mb-2'%>
+			<%= select_tag 'search[country]', options_for_select(@countries, selected: params.dig(:search, :country)), class: 'form-control mb-2'%>
 			<%= label_tag 'search[devices]', 'Devices' %>
-      <%= select_tag 'search[devices]', options_for_select([['All', 'All']] + @devices, selected: params.dig(:search, :devices)), multiple: true, size: 12, class: 'form-control mb-2' %>
+      <%= select_tag 'search[devices]', options_for_select(@devices, selected: params.dig(:search, :devices)), multiple: true, size: 12, class: 'form-control mb-2' %>
       <%= submit_tag "Search", class: "btn btn-primary" %>
 		<% end %>
 	</div>
@@ -53,5 +50,3 @@
 		</table>
 	</div>
 </div>
-
-
