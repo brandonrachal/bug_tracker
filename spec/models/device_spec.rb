@@ -24,4 +24,27 @@ describe Device do
 		end
 	end
 
+	describe '.all_with_bug_count' do
+		let!(:galaxy_s10) { create(:galaxy_s10) }
+		let!(:htc_one) { create(:htc_one) }
+		let!(:iphone_5) { create(:iphone_5) }
+
+		let!(:brandon) do
+			tester = create(:brandon)
+			FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+			FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+			FactoryBot.create(:bug, device: htc_one, tester: tester)
+			tester
+		end
+
+		it 'should return Devices by bug counts desc' do
+			devices = [galaxy_s10, htc_one, iphone_5]
+			results = Device.all_with_bug_count
+			expect(results.first).to be_an_instance_of Device
+			expect(results.map(&:id)).to eq devices.map(&:id)
+			expect(results.map(&:bug_count)).to eq [2, 1, 0]
+		end
+
+	end
+
 end
