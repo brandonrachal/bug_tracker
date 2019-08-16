@@ -75,7 +75,7 @@ describe Tester do
 		end
 
 		it 'should return many Devices' do
-			expect(tester.devices.count).to eq 3
+			expect(tester.devices.length).to eq 3
 		end
 
 		it 'should throw ActiveRecord::RecordInvalid when duplicate devices' do
@@ -93,7 +93,7 @@ describe Tester do
 		end
 
 		it 'should return many Bugs' do
-			expect(tester.bugs.count).to eq 4
+			expect(tester.bugs.length).to eq 4
 		end
 	end
 
