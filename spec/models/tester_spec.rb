@@ -98,6 +98,10 @@ describe Tester do
 	end
 
 	it '.all_countries should return all uniq countries' do
+		create(:brandon)
+		create(:oliver)
+		create(:dinorah)
+		create(:taichi)
 		expect(Tester.all_countries).to eq ['JP', 'MX', 'US']
 	end
 
