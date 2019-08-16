@@ -17,9 +17,9 @@ describe TesterDevice do
 	end
 
 	describe '#tester' do
-		# it "should return an instance of Tester" do
-		#   expect(bug.tester).to be_an_instance_of Tester
-		# end
+		it "should return an instance of Tester" do
+		  expect(tester_device.tester).to be_an_instance_of Tester
+		end
 
 		it 'should be invalid if tester blank' do
 			tester_device.tester = nil
@@ -28,10 +28,10 @@ describe TesterDevice do
 	end
 
 	describe '#device' do
-		# it "should return an instance of Tester" do
-		#   expect(bug.tester).to be_an_instance_of Tester
-		# end
-		
+		it "should return an instance of Device" do
+		  expect(tester_device.device).to be_an_instance_of Device
+		end
+
 		it 'should be invalid if device blank' do
 			tester_device.device = nil
 			expect(tester_device).to_not be_valid
