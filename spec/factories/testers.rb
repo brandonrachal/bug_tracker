@@ -39,10 +39,13 @@ FactoryBot.define do
 
 		trait :with_bugs do
 			after :create do |tester|
-				tester.bugs << FactoryBot.create(:bug_galaxy_s10)
-				tester.bugs << FactoryBot.create(:bug_galaxy_s10)
-				tester.bugs << FactoryBot.create(:bug_htc_one)
-				tester.bugs << FactoryBot.create(:bug_iphone_5)
+				galaxy_s10 = FactoryBot.create(:galaxy_s10)
+				htc_one = FactoryBot.create(:htc_one)
+				iphone_5 = FactoryBot.create(:iphone_5)
+				FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+				FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+				FactoryBot.create(:bug, device: htc_one, tester: tester)
+				FactoryBot.create(:bug, device: iphone_5, tester: tester)
 			end
 		end
 
