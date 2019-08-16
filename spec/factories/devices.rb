@@ -14,6 +14,13 @@ FactoryBot.define do
 		factory :iphone_5 do
 			description { 'iPhone 5' }
 		end
+
+		trait :with_bugs do
+			after :create do |device|
+				FactoryBot.create(:bug, device: device)
+				FactoryBot.create(:bug, device: device)
+			end
+		end
 	end
 
 end
