@@ -106,28 +106,66 @@ describe Tester do
 	end
 
 	describe '.search' do
-		it 'should return Testers by bug counts desc' do
-			one = create(:tester, :with_bugs)
-			two = create(:tester)
-			two.bugs << FactoryBot.create(:bug_galaxy_s10)
-			two.bugs << FactoryBot.create(:bug_htc_one)
-			three = create(:tester)
-			three.bugs << FactoryBot.create(:bug_iphone_5)
-			ids = Tester.search('', []).map(&:id)
-			expect(ids).to eq [one.id, two.id, three.id]
-			bug_counts = Tester.search('', []).map(&:bug_count)
-			expect(bug_counts).to eq [4, 2, 1]
+
+		let!(:galaxy_s10) { create(:galaxy_s10) }
+		let!(:htc_one) { create(:htc_one) }
+		let!(:iphone_5) { create(:iphone_5) }
+
+		let!(:brandon) do
+			tester = create(:brandon)
+			FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+			FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+			FactoryBot.create(:bug, device: htc_one, tester: tester)
+			FactoryBot.create(:bug, device: iphone_5, tester: tester)
+			tester
 		end
 
-		it 'should return Testers from the US' do
-			one = create(:tester, :with_bugs)
-			two = create(:dinorah)
-			two.bugs << FactoryBot.create(:bug_galaxy_s10)
-			two.bugs << FactoryBot.create(:bug_htc_one)
-			three = create(:oliver)
-			three.bugs << FactoryBot.create(:bug_iphone_5)
-			ids = Tester.search('US', []).map(&:id)
-			expect(ids).to eq [one.id, three.id]
+		let!(:dinorah) do
+			tester = create(:dinorah)
+			FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+			FactoryBot.create(:bug, device: htc_one, tester: tester)
+			tester
+		end
+
+		let!(:oliver) do
+			tester = create(:oliver)
+			FactoryBot.create(:bug, device: galaxy_s10, tester: tester)
+			FactoryBot.create(:bug, device: iphone_5, tester: tester)
+			tester
+		end
+
+		let!(:taichi) do
+			tester = create(:taichi)
+			FactoryBot.create(:bug, device: iphone_5, tester: tester)
+			tester
+		end
+
+		let!(:tester) { create(:tester) }
+
+		it 'should return Testers by bug counts desc' do
+			testers = [brandon, dinorah, oliver, taichi, tester]
+			results = Tester.search('', [])
+			expect(results.map(&:id)).to eq testers.map(&:id)
+			expect(results.map(&:bug_count)).to eq [4, 2, 2, 1, 0]
+		end
+
+		it 'should return Testers with country code US' do
+			testers = [brandon, oliver, tester]
+			results = Tester.search('US', [])
+			expect(results.map(&:id)).to eq testers.map(&:id)
+			expect(results.map(&:bug_count)).to eq [4, 2, 0]
+		end
+
+		it 'should return 1 Tester with country code JP and iPhone 5 bug' do
+			testers = [taichi]
+			results = Tester.search('JP', [iphone_5.id])
+			expect(results.map(&:id)).to eq testers.map(&:id)
+			expect(results.map(&:bug_count)).to eq [1]
+		end
+
+		it 'should return 0 Tester with country code JP and Galaxy S10 bug' do
+			results = Tester.search('JP', [galaxy_s10.id])
+			expect(results.length).to eq 0
 		end
 
 	end
