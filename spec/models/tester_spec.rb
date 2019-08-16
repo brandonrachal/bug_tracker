@@ -154,6 +154,7 @@ describe Tester do
 			results = Tester.search('US', [])
 			expect(results.map(&:id)).to eq testers.map(&:id)
 			expect(results.map(&:bug_count)).to eq [4, 2, 0]
+			expect(results.map(&:country)).to eq ['US', 'US', 'US']
 		end
 
 		it 'should return 1 Tester with country code JP and iPhone 5 bug' do
@@ -161,9 +162,10 @@ describe Tester do
 			results = Tester.search('JP', [iphone_5.id])
 			expect(results.map(&:id)).to eq testers.map(&:id)
 			expect(results.map(&:bug_count)).to eq [1]
+			expect(results.map(&:country)).to eq ['JP']
 		end
 
-		it 'should return 0 Tester with country code JP and Galaxy S10 bug' do
+		it 'should return 0 Testers with country code JP and Galaxy S10 bug' do
 			results = Tester.search('JP', [galaxy_s10.id])
 			expect(results.length).to eq 0
 		end
