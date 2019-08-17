@@ -1,1 +1,18 @@
-<h2>Device - <%= @device.id %></h2>
+<h2>Device - <%= @device.id %> - <%= @device.description %></h2>
+<h3>Bugs</h3>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Tester</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @device.bugs.each do |bug| %>
+		<tr>
+			<td><%= bug.id %></td>
+			<td><%= full_name bug.tester %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
