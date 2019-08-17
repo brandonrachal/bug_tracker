@@ -1,4 +1,4 @@
-<h1>Devices</h1>
+<h2>Devices</h2>
 <div class="row">
 	<div class="col-md-12">
 		<table class="table table-striped">
@@ -13,7 +13,7 @@
 				<% @devices.each do |device| %>
 				<tr>
 					<td><%= device.id %></td>
-					<td><%= device.description %></td>
+					<td><%= link_to device.description, device_path(device) %></td>
 					<td><%= device.bug_count %></td>
 				</tr>
 				<% end %>
